@@ -2,10 +2,8 @@ package com.ugahacks.BestRoute.processors;
 
 import java.io.IOException;
 
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GasPriceProcessor {
@@ -38,7 +36,7 @@ public class GasPriceProcessor {
             Response response = client.newCall(request).execute();
             fullJson = response.body().string();
         } catch (IOException e) {
-            System.out.println("Invalid Input");
+            throw new RuntimeException("Invalid Input");
         }
         return Double.parseDouble(fullJson.substring(fullJson.indexOf("gasoline") + 11, fullJson.indexOf("gasoline") + 16));   
     }
